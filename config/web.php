@@ -16,12 +16,21 @@ $config = [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'rtPgQRDW2IBADuJwYQ9OPAHjg-gHbITP',
         ],
+        'session' => [
+            'class' => 'yii\web\Session',
+            'timeout' => 1800, // 30 minutes
+        ],
+        'formatter' => [
+            'class' => 'yii\i18n\Formatter',
+            'currencyCode' => 'KES', // Set default currency to Kenyan Shilling
+        ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
             'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
+            'enableAutoLogin' => false,
+            'authTimeout' => 1800, // 30 minutes
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
