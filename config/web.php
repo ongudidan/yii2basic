@@ -63,6 +63,9 @@ $config = [
         'parent' => [
             'class' => 'app\modules\parent\parent',
         ],
+        'health' => [
+            'class' => 'app\modules\health\health',
+        ],
     ],
     'components' => [
         'request' => [
