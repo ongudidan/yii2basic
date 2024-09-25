@@ -34,7 +34,7 @@ if ($host === 'localhost') {
     // Default fallback or other environments
     return [
         'class' => 'yii\db\Connection',
-        'dsn' => 'mysql:host=mariadb;dbname=basic',
+        'dsn' => 'mysql:host=mariadb;dbname=hopeui',
         'username' => 'root',
         'password' => 'root',
         'charset' => 'utf8',

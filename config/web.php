@@ -11,6 +11,59 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
+    'modules' => [
+        'dashboard' => [
+            'class' => 'app\modules\dashboard\dashboard',
+        ],
+        'student' => [
+            'class' => 'app\modules\student\student',
+        ],
+        'staff' => [
+            'class' => 'app\modules\staff\staff',
+        ],
+        'attendance' => [
+            'class' => 'app\modules\attendance\attendance',
+        ],
+        'class' => [
+            'class' => 'app\modules\class\class',
+        ],
+        'exam' => [
+            'class' => 'app\modules\exam\exam',
+        ],
+        'fees' => [
+            'class' => 'app\modules\fees\fees',
+        ],
+        'library' => [
+            'class' => 'app\modules\library\library',
+        ],
+        'timetable' => [
+            'class' => 'app\modules\timetable\timetable',
+        ],
+        'communication' => [
+            'class' => 'app\modules\communication\communication',
+        ],
+        'transport' => [
+            'class' => 'app\modules\transport\transport',
+        ],
+        'hostel' => [
+            'class' => 'app\modules\hostel\hostel',
+        ],
+        'portal' => [
+            'class' => 'app\modules\portal\portal',
+        ],
+        'inventory' => [
+            'class' => 'app\modules\inventory\inventory',
+        ],
+        'event' => [
+            'class' => 'app\modules\event\event',
+        ],
+        'finance' => [
+            'class' => 'app\modules\finance\finance',
+        ],
+        'parent' => [
+            'class' => 'app\modules\parent\parent',
+        ],
+    ],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -54,8 +107,7 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
-            ],
+            'rules' => [],
         ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
