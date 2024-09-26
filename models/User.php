@@ -62,9 +62,8 @@ class User extends ActiveRecord implements IdentityInterface
             // General status rules
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
-            [['email','username'], 'required'],
+            [['username'], 'required'],
             ['email', 'email'],
-            ['gender', 'string'],
 
             // Rules specific to change password scenario
             [['oldPassword', 'newPassword', 'newPasswordConfirm'], 'required', 'on' => 'changePassword'],

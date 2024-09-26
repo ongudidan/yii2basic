@@ -110,7 +110,16 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [],
+            'rules' => [
+                '/'=> '/dashboard',
+                '/dash' => '/dashboard/default/index',
+                '/dash/student' => '/dashboard/student/index',
+                '/dash/student/create' => '/dashboard/student/create',
+
+
+
+
+            ],
         ],
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
@@ -122,9 +131,9 @@ $config = [
                 'kartik\form\ActiveFormAsset' => [
                     'bsDependencyEnabled' => false // do not load bootstrap assets for a specific asset bundle
                 ],
-                // 'yii\web\JqueryAsset' => [
-                //     'js' => ["/web/otika/assets/js/app.min.js"],  // Disable Yii2's default jQuery
-                // ],
+                'yii\web\JqueryAsset' => [
+                    'js' => ["/web/dashboard/assets/js/jquery-3.6.0.min.js"],  // Disable Yii2's default jQuery
+                ],
             ],
         ],
     ],
