@@ -57,8 +57,8 @@ class Student extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'admission_no', 'first_name', 'last_name'], 'required'],
-            [['date_of_birth', 'created_at', 'updated_at'], 'integer'],
+            [['user_id', 'admission_no', 'first_name', 'middle_name', 'last_name', 'date_of_birth', 'last_name'], 'required'],
+            [['created_at', 'updated_at'], 'integer'],
             [['address'], 'string'],
             [['first_name', 'middle_name', 'last_name', 'gender', 'religion', 'email', 'phone'], 'string', 'max' => 255],
             [['status'], 'string', 'max' => 20],
@@ -97,12 +97,26 @@ class Student extends \yii\db\ActiveRecord
         $prefix = 'STD/';
         $yearPrefix = '/' . $year;
 
-        $lastRecord = self::find()->orderBy(['id' => SORT_DESC])->one();
-        $lastNumber = $lastRecord ? intval(substr($lastRecord->admission_no, 4, 5)) : 0;
+        // Get the maximum admission number from the database
+        $lastRecord = self::find()
+            ->select(['admission_no'])
+            ->orderBy(['admission_no' => SORT_DESC])
+            ->limit(1)
+            ->one();
+
+        // Extract the last number from the highest admission number
+        if ($lastRecord && preg_match('/(\d{5})\/' . $year . '$/', $lastRecord->admission_no, $matches)) {
+            $lastNumber = intval($matches[1]);
+        } else {
+            $lastNumber = 0; // Default to 0 if no records found
+        }
+
+        // Increment the last number to create a new number
         $newNumber = str_pad($lastNumber + 1, 5, '0', STR_PAD_LEFT);
 
         return $prefix . $newNumber . $yearPrefix;
     }
+
 
     /**
      * Gets query for [[Attendances]].

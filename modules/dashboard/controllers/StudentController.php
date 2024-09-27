@@ -29,7 +29,7 @@ class StudentController extends Controller
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
-                        'delete' => ['POST'],
+                        // 'delete' => ['POST'],
                     ],
                 ],
             ]
@@ -82,6 +82,7 @@ class StudentController extends Controller
                 // Generate and set the admission number
                 $model->admission_no = Student::generateAdmissionNo();
                 $model->id = IdGenerator::generateUniqueId();
+                // $model->date_of_birth = strtotime($model->date_of_birth);
 
                 // Set User attributes
                 $user->id = IdGenerator::generateUniqueId();
@@ -137,18 +138,28 @@ class StudentController extends Controller
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
+  public function actionUpdate($id)
+{
+    $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+    if ($this->request->isPost) {
+        // Load the data into the Students model
+        if ($model->load($this->request->post())) {
+            // Convert date_of_birth to Unix timestamp
+            // $model->date_of_birth = strtotime($model->date_of_birth);
+
+            // Save the updated model
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
+
+    return $this->render('update', [
+        'model' => $model,
+    ]);
+}
+
 
     /**
      * Deletes an existing Student model.
@@ -159,10 +170,15 @@ class StudentController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $student = $this->findModel($id);
+        $userId = $student->user_id; // Assuming there's a user_id field
+
+        $student->delete(); // Delete the student
+        if ($userId) User::findOne($userId)?->delete(); // Delete the user if exists
 
         return $this->redirect(['index']);
     }
+
 
     /**
      * Finds the Student model based on its primary key value.

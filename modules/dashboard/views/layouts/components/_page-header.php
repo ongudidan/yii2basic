@@ -1,11 +1,16 @@
-    <div class="page-header">
-        <div class="row">
-            <div class="col">
-                <h3 class="page-title">Blank Page</h3>
-                <ul class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Blank Page</li>
-                </ul>
-            </div>
+<?php
+
+use yii\widgets\Breadcrumbs;
+?>
+<div class="page-header">
+    <div class="row">
+        <div class="col">
+            <h3 class="page-title"><?= $this->title?></h3>
+            <?= Breadcrumbs::widget([
+                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                'itemTemplate' => "<li class=\"breadcrumb-item\">{link}</li>\n", // Template for links
+                'activeItemTemplate' => "<li class=\"breadcrumb-item active\">{link}</li>", // Template for the active item
+            ]) ?>
         </div>
     </div>
+</div>

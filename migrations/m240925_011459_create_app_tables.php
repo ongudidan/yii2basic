@@ -80,7 +80,7 @@ class m240925_011459_create_app_tables extends Migration
             'last_name' => $this->string()->notNull(),
             'gender' => $this->string(),
             'religion' => $this->string(),
-            'date_of_birth' => $this->integer(), // Unix timestamp
+            'date_of_birth' => $this->string(), // Unix timestamp
             'email' => $this->string(),
             'phone' => $this->string(),
             'address' => $this->text(),
@@ -116,13 +116,13 @@ class m240925_011459_create_app_tables extends Migration
         $this->createTable('{{%staff}}', [
             'id' => $this->string()->notNull()->unique(), // Custom string ID
             'user_id' => $this->string()->notNull(), // Changed to string
+            'staff_no' => $this->string()->notNull(),
             'first_name' => $this->string()->notNull(),
             'last_name' => $this->string()->notNull(),
             'email' => $this->string()->unique(),
             'phone' => $this->string(),
             'address' => $this->text(),
             'position' => $this->string(), // e.g., teacher, admin
-            'date_hired' => $this->integer(), // Unix timestamp
             'status' => $this->string(20)->defaultValue('active'), // active, inactive
             'created_at' => $this->integer()->notNull(),
             'updated_at' => $this->integer()->notNull(),
